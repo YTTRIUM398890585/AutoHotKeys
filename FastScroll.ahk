@@ -6,8 +6,8 @@
 A_HotkeyInterval := 0
 
 ; Array of windows to ignore
-; ignoring vscode and minecraft
-ignoredWindows := ["ahk_exe code.exe", "ahk_exe code_ignore.exe", "ahk_exe minecraftlauncher.exe", "ahk_exe minecraft.exe"]
+; do now ignore vscode otherwise will mess up alt + scroll for vscode
+ignoredWindows := ["ahk_exe minecraftlauncher.exe", "ahk_exe minecraft.exe"]
 
 ; Function to check if any of the specified windows is active
 IsIgnoredWindowActive() {
@@ -34,10 +34,12 @@ IsIgnoredWindowActive() {
 ; alt needs to be released when sending scroll, otherwise it will be zooming
 *WheelUp::
 {
-    if (GetKeyState("Alt", "P") && !IsIgnoredWindowActive()) {
-        Send("{Blind}{Alt up}")  ; Release Alt temporarily
+    if ((GetKeyState("LAlt", "P") || GetKeyState("RAlt", "P")) && !IsIgnoredWindowActive()) {
+        Send("{Blind}{LAlt up}")  ; Release Alt temporarily
+        Send("{Blind}{RAlt up}")  ; Release Alt temporarily
         Send("{WheelUp 10}")
-        Send("{Blind}{Alt down}")  ; Restore Alt
+        Send("{Blind}{LAlt down}")  ; Restore Alt
+        Send("{Blind}{RAlt down}")  ; Restore Alt
     } else {
         Send("{WheelUp}")
     }
@@ -46,15 +48,35 @@ IsIgnoredWindowActive() {
 
 *WheelDown::
 {
-    if (GetKeyState("Alt", "P") && !IsIgnoredWindowActive()) {
-        Send("{Blind}{Alt up}")  ; Release Alt temporarily
+    if ((GetKeyState("LAlt", "P") || GetKeyState("RAlt", "P"))  && !IsIgnoredWindowActive()) {
+        Send("{Blind}{LAlt up}")  ; Release Alt temporarily
+        Send("{Blind}{RAlt up}")  ; Release Alt temporarily
         Send("{WheelDown 10}")
-        Send("{Blind}{Alt down}")  ; Restore Alt
+        Send("{Blind}{LAlt down}")  ; Restore Alt
+        Send("{Blind}{RAlt down}")  ; Restore Alt
     } else {
         Send("{WheelDown}")
     }
     return
 }
+
+LAlt::RAlt ; Make left Alt behave like right Alt
+
+; !::
+; {
+;     if (!WinActive("ahk_exe opera.exe")) {
+;         Send("{Blind}{Alt down}")
+;     }  
+;     return
+; }
+
+; !up::
+; {
+;     if (!WinActive("ahk_exe opera.exe")) {
+;         Send("{Blind}{Alt up}")
+;     }  
+;     return
+; }
 
 ; Below with the event being alt + scroll doesnt work as will cause zoom with alt pressed down
 ; !WheelUp::
