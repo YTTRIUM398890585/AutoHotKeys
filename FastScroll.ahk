@@ -1,8 +1,12 @@
-﻿#Requires AutoHotkey v2.0
+﻿; https://www.autohotkey.com/docs/v2/
 
+#Requires AutoHotkey v2.0
+
+; Set the interval between hotkey presses to 0 so that the error of the hotkey being pressed too quickly is not shown
 A_HotkeyInterval := 0
 
 ; Array of windows to ignore
+; ignoring vscode and minecraft
 ignoredWindows := ["ahk_exe code.exe", "ahk_exe code_ignore.exe", "ahk_exe minecraftlauncher.exe", "ahk_exe minecraft.exe"]
 
 ; Function to check if any of the specified windows is active
@@ -25,8 +29,9 @@ IsIgnoredWindowActive() {
 ; notepad
 ; in chrome and opera gx only mouse working
 
-; context mene still shows up in discord and opera gx
+; context menu still shows up in discord and opera gx
 
+; alt needs to be released when sending scroll, otherwise it will be zooming
 *WheelUp::
 {
     if (GetKeyState("Alt", "P") && !IsIgnoredWindowActive()) {
@@ -51,32 +56,23 @@ IsIgnoredWindowActive() {
     return
 }
 
-; *WheelUp::
+; Below with the event being alt + scroll doesnt work as will cause zoom with alt pressed down
+; !WheelUp::
 ; {
-;     if (GetKeyState("Alt", "P") && !IsIgnoredWindowActive()) {
+;     if (!IsIgnoredWindowActive()) {
 ;         Send("{Blind}{Alt up}")  ; Release Alt temporarily
-;         Loop 10 {
-;             Send("{WheelUp}")
-;             Sleep 10  ; Delay between each scroll event
-;         }
+;         Send("{WheelUp 10}")
 ;         Send("{Blind}{Alt down}")  ; Restore Alt
-;     } else {
-;         Send("{WheelUp}")
 ;     }
 ;     return
 ; }
 
-; *WheelDown::
+; !WheelDown::
 ; {
-;     if (GetKeyState("Alt", "P") && !IsIgnoredWindowActive()) {
+;     if (!IsIgnoredWindowActive()) {
 ;         Send("{Blind}{Alt up}")  ; Release Alt temporarily
-;         Loop 10 {
-;             Send("{WheelDown}")
-;             Sleep 10  ; Delay between each scroll event
-;         }
+;         Send("{WheelDown 10}")
 ;         Send("{Blind}{Alt down}")  ; Restore Alt
-;     } else {
-;         Send("{WheelDown}")
 ;     }
 ;     return
 ; }
