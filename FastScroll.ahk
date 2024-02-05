@@ -41,9 +41,9 @@ IsIgnoredWindowActive() {
 *WheelUp::
 {
     if (GetKeyState("RAlt") && !IsIgnoredWindowActive()) {
-        ; Send("{Blind}{RAlt up}")  ; Release Alt temporarily
+        Send("{Blind}{RAlt up}")  ; Release Alt temporarily
         Send("{WheelUp 10}")
-        ; Send("{Blind}{RAlt down}")  ; Restore Alt
+        Send("{Blind}{RAlt down}")  ; Restore Alt
     } else {
         Send("{WheelUp}")
     }
@@ -53,9 +53,9 @@ IsIgnoredWindowActive() {
 *WheelDown::
 {
     if (GetKeyState("RAlt") && !IsIgnoredWindowActive()) {
-        ; Send("{Blind}{RAlt up}")  ; Release Alt temporarily
+        Send("{Blind}{RAlt up}")  ; Release Alt temporarily
         Send("{WheelDown 10}")
-        ; Send("{Blind}{RAlt down}")  ; Restore Alt
+        Send("{Blind}{RAlt down}")  ; Restore Alt
     } else {
         Send("{WheelDown}")
     }
