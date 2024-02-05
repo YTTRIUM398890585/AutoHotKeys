@@ -24,6 +24,7 @@ IsIgnoredWindowActive() {
 ; ^ = ctrl
 ; # = win
 
+; Notes:
 ; tested to work with:
 ; discord
 ; notepad
@@ -33,6 +34,10 @@ IsIgnoredWindowActive() {
 ; context menu still shows up in discord and opera gx, not if Ralt used
 
 ; Lalt needs to be released when sending scroll, otherwise it will be zooming, but Ralt no need
+
+; TODO:
+; make trackpad + opera works, right now using browser extension but it doesnt work on some websites like pdf viewer
+
 *WheelUp::
 {
     if (GetKeyState("RAlt") && !IsIgnoredWindowActive()) {
