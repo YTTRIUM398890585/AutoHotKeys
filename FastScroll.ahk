@@ -34,12 +34,10 @@ IsIgnoredWindowActive() {
 ; alt needs to be released when sending scroll, otherwise it will be zooming
 *WheelUp::
 {
-    if ((GetKeyState("LAlt", "P") || GetKeyState("RAlt", "P")) && !IsIgnoredWindowActive()) {
-        Send("{Blind}{LAlt up}")  ; Release Alt temporarily
-        Send("{Blind}{RAlt up}")  ; Release Alt temporarily
+    if (GetKeyState("RAlt") && !IsIgnoredWindowActive()) {
+        ; Send("{Blind}{RAlt up}")  ; Release Alt temporarily
         Send("{WheelUp 10}")
-        Send("{Blind}{LAlt down}")  ; Restore Alt
-        Send("{Blind}{RAlt down}")  ; Restore Alt
+        ; Send("{Blind}{RAlt down}")  ; Restore Alt
     } else {
         Send("{WheelUp}")
     }
@@ -48,12 +46,10 @@ IsIgnoredWindowActive() {
 
 *WheelDown::
 {
-    if ((GetKeyState("LAlt", "P") || GetKeyState("RAlt", "P"))  && !IsIgnoredWindowActive()) {
-        Send("{Blind}{LAlt up}")  ; Release Alt temporarily
-        Send("{Blind}{RAlt up}")  ; Release Alt temporarily
+    if (GetKeyState("RAlt") && !IsIgnoredWindowActive()) {
+        ; Send("{Blind}{RAlt up}")  ; Release Alt temporarily
         Send("{WheelDown 10}")
-        Send("{Blind}{LAlt down}")  ; Restore Alt
-        Send("{Blind}{RAlt down}")  ; Restore Alt
+        ; Send("{Blind}{RAlt down}")  ; Restore Alt
     } else {
         Send("{WheelDown}")
     }
