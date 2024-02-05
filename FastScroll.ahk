@@ -27,11 +27,12 @@ IsIgnoredWindowActive() {
 ; tested to work with:
 ; discord
 ; notepad
+; vscode
 ; in chrome and opera gx only mouse working
 
-; context menu still shows up in discord and opera gx
+; context menu still shows up in discord and opera gx, not if Ralt used
 
-; alt needs to be released when sending scroll, otherwise it will be zooming
+; Lalt needs to be released when sending scroll, otherwise it will be zooming, but Ralt no need
 *WheelUp::
 {
     if (GetKeyState("RAlt") && !IsIgnoredWindowActive()) {
